@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace TechJobsConsole
@@ -137,6 +138,25 @@ namespace TechJobsConsole
             valueBuilder.Clear();
 
             return rowValues.ToArray();
+        }
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            LoadData();
+            
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> x in row)
+                {
+                    if (x.Value.Contains(value))
+                    {
+                        jobs.Add(row);
+                        break;
+                    }
+                }
+            }
+            return jobs;
         }
     }
 }
