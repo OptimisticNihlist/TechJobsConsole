@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 
 namespace TechJobsConsole
 {
@@ -49,8 +52,10 @@ namespace TechJobsConsole
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
+                string bValue = aValue.ToLower();
+                string searchValue = value.ToLower();
 
-                if (aValue.Contains(value))
+                if (bValue.Contains(searchValue))
                 {
                     jobs.Add(row);
                 }
@@ -149,7 +154,9 @@ namespace TechJobsConsole
             {
                 foreach (KeyValuePair<string, string> x in row)
                 {
-                    if (x.Value.Contains(value))
+                    string z = x.Value.ToLower();
+                    string val = value.ToLower();
+                    if (z.Contains(val))
                     {
                         jobs.Add(row);
                         break;
@@ -160,3 +167,19 @@ namespace TechJobsConsole
         }
     }
 }
+/*
+ * Was working on bonus mission but am just giving up at the moment.
+foreach (Dictionary<string, string> jobListing in jobs)
+{
+    foreach (KeyValuePair<string, string> jobListingValue in jobListing)
+    {
+        char firstLetter = jobListingValue.Value.ElementAt(1);
+
+        if (firstLetter > charValue(val.ElementAt(1))
+                                {
+
+        }
+    }
+
+}
+*/
